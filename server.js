@@ -1,13 +1,20 @@
 const express = require('express');
 const mongoose = require('mongoose')
 
-const auth = require('./routes/api/auth');
+const auth = require('./routes/api/user');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
+
+const bodyParser = require('body-parser');
 
 
 
 const app = express();
+
+//body-prser middleware
+
+app.use(bodyParser.urlencoded({encoded : false}));
+app.use(bodyParser.json());
 //DB config
 
 
@@ -24,7 +31,7 @@ mongoose
 
 
 app.get('/', (req,res) => res.json({a : 'Hello!!ß'}));
-
+ 
 //use routes
 
 app.use('/api/auth',auth);
